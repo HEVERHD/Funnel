@@ -1,65 +1,38 @@
-import React, { useState } from 'react';
-import ReactApexChart from 'react-apexcharts';
+import React from 'react';
+import { FunnelChart, Funnel, Tooltip, LabelList } from 'recharts';
 
-const Funnel = () => {
-    const [series, setSeries] = useState([
-        {
-            name: "Funnel Series",
-            data: [1380, 1100, 990, 880, 740, 548, 330, 200],
-        }
-    ]);
+const data = [
+    {
+        name: 'Invitacion created',
+        value: 1000,
+        fill: '#FF4560',
+    },
+    {
+        name: 'Invitacion opened',
+        value: 980,
+        fill: '#775DD0',
+    },
+    {
+        name: 'Show consent',
+        value: 960,
+        fill: '#FEB019',
+    },
+    {
+        name: 'Accept consent',
+        value: 900,
+        fill: '#00E396',
+    },
+];
 
-    const [options, setOptions] = useState({
-        chart: {
-            type: 'bar',
-            height: 350,
-        },
-        plotOptions: {
-            bar: {
-                borderRadius: 0,
-                horizontal: true,
-                barHeight: '80%',
-                isFunnel: true,
-            },
-        },
-        dataLabels: {
-            enabled: true,
-            formatter: function (val, opt) {
-                return opt.w.globals.labels[opt.dataPointIndex] + ':  ' + val;
-            },
-            dropShadow: {
-                enabled: true,
-            },
-        },
-        title: {
-            text: 'Recruitment Funnel',
-            align: 'middle',
-        },
-        xaxis: {
-            categories: [
-                'Sourced',
-                'Screened',
-                'Assessed',
-                'HR Interview',
-                'Technical',
-                'Verify',
-                'Offered',
-                'Hired',
-            ],
-        },
-        legend: {
-            show: false,
-        },
-    });
-
+const CustomFunnelChart = () => {
     return (
-        <div>
-            <div id="chart">
-                <ReactApexChart options={options} series={series} type="bar" height={350} />
-            </div>
-            <div id="html-dist"></div>
-        </div>
+        <FunnelChart width={730} height={250}>
+            <Tooltip />
+            <Funnel dataKey="value" data={data} isAnimationActive>
+                <LabelList position="right" fill="#000" stroke="none" dataKey="name" />
+            </Funnel>
+        </FunnelChart>
     );
 };
 
-export default Funnel;
+export default CustomFunnelChart;
