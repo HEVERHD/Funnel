@@ -13,7 +13,7 @@ function App() {
     <>
       <CustomBubbleChart />
       <Funnel />
-      <Burbujas />
+      {/* <Burbujas /> */}
       <Column />
     </>
   )
